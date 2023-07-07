@@ -29,7 +29,7 @@ internal fun OnBoardingScreen(
 
     RunOnActivityStart(
         onStart = {
-            onBoardingViewModel.checkIfNeedsNotificationsPermission(context)
+            onBoardingViewModel.checkIfNeedsNotificationsPermission()
         }
     )
 
