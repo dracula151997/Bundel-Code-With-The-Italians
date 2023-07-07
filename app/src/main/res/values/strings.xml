@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">Bundel-Code-With-The-Italians</string>
     <string name="service_name">Notification listener</string>
-    <string name="bundle_code_with_the_italians">Bundle Code With The Italians!</string>
+    <string name="bundle_code_with_the_italians">Bundle</string>
     <string name="give_us_permission_to_read_your_notifications">Give us permission to read your notifications!</string>
     <string name="you_are_all_set">Let\'s go</string>
+    <string name="give_us_permission">Grant the permission</string>
 </resources>
