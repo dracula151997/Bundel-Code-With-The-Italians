@@ -51,7 +51,7 @@ class MainActivity : ComponentActivity() {
                 }
                 composable(route = Screen.NotificationList.route){
                     NotificationsListScreen(
-                        viewModel = notificationListViewModel
+                        lifecycle = lifecycle,
                     )
                 }
             }

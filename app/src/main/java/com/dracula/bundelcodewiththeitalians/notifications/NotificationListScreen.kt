@@ -10,24 +10,23 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.DefaultLifecycleObserver
-import androidx.lifecycle.LifecycleOwner
-import com.dracula.bundelcodewiththeitalians.utils.RunOnActivityStart
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.flowWithLifecycle
+import com.dracula.bundelcodewiththeitalians.notifications.service.BundelNotificationListenerService
 
 @Composable
 internal fun NotificationsListScreen(
-    viewModel: NotificationsListViewModel,
+    lifecycle: Lifecycle
 ) {
-    val state by viewModel.state.collectAsState(initial = NotificationsListViewModel.State.EMPTY)
+    val notifications by remember(lifecycle) {
+        BundelNotificationListenerService.notificationFlow.flowWithLifecycle(lifecycle = lifecycle)
+    }.collectAsState(initial = emptyList())
 
-    RunOnActivityStart(onStart = viewModel::startObserving)
 
     Column(Modifier.fillMaxSize()) {
         LazyColumn(modifier = Modifier.fillMaxSize()) {
@@ -38,7 +37,7 @@ internal fun NotificationsListScreen(
                     modifier = Modifier.padding(8.dp)
                 )
             }
-            items(state.notifications.filter { it.isNotEmpty() }) { notification ->
+            items(notifications.filter { it.isNotEmpty() }) { notification ->
                 Card(
                     Modifier
                         .fillMaxWidth()

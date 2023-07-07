@@ -20,13 +20,6 @@ internal fun OnBoardingScreen(
     onSettingBtnClicked: () -> Unit,
     onDismissClicked: () -> Unit,
 ) {
-    val onBoardingViewModel = hiltViewModel<OnBoardingViewModel>()
-
-    RunOnActivityStart(
-        onStart = {
-            onBoardingViewModel.checkIfNeedsNotificationsPermission()
-        }
-    )
 
     Column(
         modifier = Modifier.fillMaxSize(),

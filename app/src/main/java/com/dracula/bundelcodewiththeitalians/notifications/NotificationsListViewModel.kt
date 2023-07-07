@@ -15,7 +15,11 @@ internal class NotificationsListViewModel @Inject constructor() : ViewModel() {
     private val _state = MutableStateFlow(State(emptyList(), false))
     val state: Flow<State> = _state
 
-    fun startObserving() {
+    init {
+        startObserving()
+    }
+
+    private fun startObserving() {
         viewModelScope.launch {
             BundelNotificationListenerService.notificationFlow.collect { notifications ->
                 _state.value = State(notifications, isConnected = true)
