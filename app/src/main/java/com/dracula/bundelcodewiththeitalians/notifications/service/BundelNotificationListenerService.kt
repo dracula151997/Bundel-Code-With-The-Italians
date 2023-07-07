@@ -1,9 +1,9 @@
-package com.dracula.bundelcodewiththeitalians
+package com.dracula.bundelcodewiththeitalians.notifications.service
 
 import android.service.notification.NotificationListenerService
 import android.service.notification.StatusBarNotification
+import com.dracula.bundelcodewiththeitalians.notifications.util.text
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import timber.log.Timber
 

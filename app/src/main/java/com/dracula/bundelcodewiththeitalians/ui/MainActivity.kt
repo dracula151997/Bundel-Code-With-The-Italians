@@ -1,19 +1,23 @@
-package com.dracula.bundelcodewiththeitalians
+package com.dracula.bundelcodewiththeitalians.ui
 
-import android.content.ComponentName
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.provider.Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS
-import android.text.TextUtils
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.DefaultLifecycleObserver
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.dracula.bundelcodewiththeitalians.onboarding.OnBoardingScreen
+import com.dracula.bundelcodewiththeitalians.onboarding.OnBoardingViewModel
+import com.dracula.bundelcodewiththeitalians.notifications.NotificationsListScreen
+import com.dracula.bundelcodewiththeitalians.notifications.NotificationsListViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.job
 
 sealed class Screen(val route: String) {
     object OnBoarding : Screen("onBoarding")
@@ -23,7 +27,6 @@ sealed class Screen(val route: String) {
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-    private val onBoardingViewModel by viewModels<OnBoardingViewModel>()
     private val notificationListViewModel by viewModels<NotificationsListViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,7 +36,7 @@ class MainActivity : ComponentActivity() {
             NavHost(navController = navController, startDestination = Screen.OnBoarding.route){
                 composable(route = Screen.OnBoarding.route){
                     OnBoardingScreen(
-                        viewModel = onBoardingViewModel,
+                        viewModel = hiltViewModel(),
                         onSettingBtnClicked = {
                             showNotificationPreferences()
                         },
@@ -58,12 +61,6 @@ class MainActivity : ComponentActivity() {
 
     }
 
-    override fun onStart() {
-        super.onStart()
-        onBoardingViewModel.checkIfNeedsNotificationsPermission(this)
-        notificationListViewModel.startObserving()
-
-    }
 
 
 

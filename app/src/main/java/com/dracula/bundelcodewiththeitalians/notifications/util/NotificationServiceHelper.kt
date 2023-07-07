@@ -1,4 +1,4 @@
-package com.dracula.bundelcodewiththeitalians
+package com.dracula.bundelcodewiththeitalians.notifications.util
 
 import android.app.Notification
 import android.content.ComponentName

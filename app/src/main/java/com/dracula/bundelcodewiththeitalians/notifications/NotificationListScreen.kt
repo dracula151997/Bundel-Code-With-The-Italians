@@ -1,4 +1,4 @@
-package com.dracula.bundelcodewiththeitalians
+package com.dracula.bundelcodewiththeitalians.notifications
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -10,22 +10,24 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.launch
+import androidx.lifecycle.DefaultLifecycleObserver
+import androidx.lifecycle.LifecycleOwner
+import com.dracula.bundelcodewiththeitalians.utils.RunOnActivityStart
 
 @Composable
 internal fun NotificationsListScreen(
     viewModel: NotificationsListViewModel,
 ) {
     val state by viewModel.state.collectAsState(initial = NotificationsListViewModel.State.EMPTY)
+
+    RunOnActivityStart(onStart = viewModel::startObserving)
 
     Column(Modifier.fillMaxSize()) {
         LazyColumn(modifier = Modifier.fillMaxSize()) {
@@ -46,31 +48,6 @@ internal fun NotificationsListScreen(
                     Text(notification, Modifier.padding(8.dp))
                 }
             }
-        }
-    }
-}
-
-internal class NotificationsListViewModel : ViewModel() {
-
-    private val _state = MutableStateFlow(State(emptyList(), false))
-    val state: Flow<State> = _state
-
-    fun startObserving() {
-        viewModelScope.launch {
-            BundelNotificationListenerService.notificationFlow.collect { notifications ->
-                _state.value = State(notifications, isConnected = true)
-            }
-        }
-    }
-
-    data class State(
-        val notifications: List<String>,
-        val isConnected: Boolean
-    ) {
-
-        companion object {
-
-            val EMPTY = State(emptyList(), isConnected = false)
         }
     }
 }

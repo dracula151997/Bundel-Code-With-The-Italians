@@ -1,4 +1,4 @@
-package com.dracula.bundelcodewiththeitalians
+package com.dracula.bundelcodewiththeitalians.onboarding
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -11,7 +11,11 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.dracula.bundelcodewiththeitalians.R
+import com.dracula.bundelcodewiththeitalians.utils.RunOnActivityStart
 
 @Composable
 internal fun OnBoardingScreen(
@@ -20,6 +24,15 @@ internal fun OnBoardingScreen(
     onDismissClicked: () -> Unit,
 ) {
     val state by viewModel.state.collectAsState(initial = OnBoardingViewModel.State(false))
+    val onBoardingViewModel = hiltViewModel<OnBoardingViewModel>()
+    val context = LocalContext.current
+
+    RunOnActivityStart(
+        onStart = {
+            onBoardingViewModel.checkIfNeedsNotificationsPermission(context)
+        }
+    )
+
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
