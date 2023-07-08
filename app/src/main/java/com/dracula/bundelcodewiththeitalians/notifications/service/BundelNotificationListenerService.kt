@@ -22,7 +22,7 @@ class BundelNotificationListenerService : NotificationListenerService() {
     override fun onListenerConnected() {
         super.onListenerConnected()
         isConnected = true
-        _notificationFlow.value = activeNotifications.map { it.toNotification() }
+        _notificationFlow.value = activeNotifications.map { it.toNotification() }.sortedByDescending { it.timestamp }
         Timber.d("onListenerConnected")
     }
 
@@ -34,14 +34,14 @@ class BundelNotificationListenerService : NotificationListenerService() {
 
     override fun onNotificationPosted(sbn: StatusBarNotification?) {
         super.onNotificationPosted(sbn)
-        _notificationFlow.value = activeNotifications.map { it.toNotification() }
+        _notificationFlow.value = activeNotifications.map { it.toNotification() }.sortedByDescending { it.timestamp }
         Timber.d("onNotificationPosted: $sbn")
     }
 
     override fun onNotificationRemoved(sbn: StatusBarNotification?) {
         super.onNotificationRemoved(sbn)
         Timber.d("onNotificationRemoved: $sbn")
-        _notificationFlow.value = activeNotifications.map { it.toNotification() }
+        _notificationFlow.value = activeNotifications.map { it.toNotification() }.sortedByDescending { it.timestamp }
     }
 
     companion object {

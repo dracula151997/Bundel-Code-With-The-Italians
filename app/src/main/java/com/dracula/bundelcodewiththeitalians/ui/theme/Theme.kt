@@ -11,11 +11,7 @@ import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 
-private val bundel_black = Color(0xFF000000)
-private val bundel_white = Color(0xFFFFFFFF)
-private val bundel_green = Color(0xFF4CE062)
-private val bundel_green_dark = Color(0xFF1E8F3E)
-private val bundel_purple = Color(0xFF4F1D91)
+
 
 internal val bundelLightColors = lightColorScheme(
     primary = bundel_green,
