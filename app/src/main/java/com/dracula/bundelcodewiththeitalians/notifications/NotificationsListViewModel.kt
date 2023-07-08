@@ -28,13 +28,10 @@ internal class NotificationsListViewModel @Inject constructor() : ViewModel() {
     }
 
     data class State(
-        val notifications: List<String>,
+        val notifications: List<Notification>,
         val isConnected: Boolean
-    ) {
-
-        companion object {
-
-            val EMPTY = State(emptyList(), isConnected = false)
-        }
+    ){
+        val hasNotifications: Boolean
+            get() = notifications.isNotEmpty()
     }
 }

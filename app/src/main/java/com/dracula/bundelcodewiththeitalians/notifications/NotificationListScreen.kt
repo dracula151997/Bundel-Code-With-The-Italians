@@ -1,24 +1,33 @@
 package com.dracula.bundelcodewiththeitalians.notifications
 
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ElevatedCard
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
+import com.dracula.bundelcodewiththeitalians.R
 import com.dracula.bundelcodewiththeitalians.notifications.service.BundelNotificationListenerService
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun NotificationsListScreen(
     lifecycle: Lifecycle
@@ -27,26 +36,61 @@ internal fun NotificationsListScreen(
         BundelNotificationListenerService.notificationFlow.flowWithLifecycle(lifecycle = lifecycle)
     }.collectAsState(initial = emptyList())
 
-
-    Column(Modifier.fillMaxSize()) {
-        LazyColumn(modifier = Modifier.fillMaxSize()) {
-            item {
-                Text(
-                    text = "Notifications",
-                    style = MaterialTheme.typography.headlineMedium,
-                    modifier = Modifier.padding(8.dp)
-                )
-            }
-            items(notifications.filter { it.isNotEmpty() }) { notification ->
-                Card(
-                    Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 8.dp)
-                        .padding(top = 8.dp)
-                ) {
-                    Text(notification, Modifier.padding(8.dp))
+    Scaffold(
+        modifier = Modifier.fillMaxSize(),
+        topBar = {
+            NotificationsListTopAppBar()
+        }
+    ) { contentPadding ->
+        if (notifications.isNotEmpty()) {
+            LazyColumn(modifier = Modifier.fillMaxSize(), contentPadding = contentPadding) {
+                item {
+                    Text(
+                        text = stringResource(R.string.notifications_screen_title),
+                        style = MaterialTheme.typography.headlineMedium,
+                        modifier = Modifier.padding(8.dp)
+                    )
+                }
+                items(notifications) { notification ->
+                    NotificationItem(notification)
                 }
             }
+
+        } else {
+            Text(text = "No notifications", Modifier.padding(8.dp))
         }
     }
+
+
+}
+
+@Composable
+private fun NotificationItem(notification: Notification) {
+    ElevatedCard(
+        Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 8.dp)
+            .padding(top = 8.dp),
+        colors = CardDefaults.elevatedCardColors(
+            containerColor = Color.White,
+        ),
+    ) {
+        Text(notification.text ?: "[N/A]", Modifier.padding(8.dp))
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun NotificationsListTopAppBar() {
+    TopAppBar(
+        title = {
+            Text(
+                stringResource(id = R.string.app_name),
+                style = MaterialTheme.typography.headlineMedium
+            )
+        },
+        colors = TopAppBarDefaults.smallTopAppBarColors(
+            containerColor = MaterialTheme.colorScheme.primary,
+        )
+    )
 }
