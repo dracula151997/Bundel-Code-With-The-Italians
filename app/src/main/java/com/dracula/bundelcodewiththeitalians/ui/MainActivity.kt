@@ -25,7 +25,6 @@ sealed class Screen(val route: String) {
     object NotificationList : Screen("notificationList")
 }
 
-
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     private val needsNotificationPermission = lifecycle.eventAsFlow()
@@ -40,13 +39,13 @@ class MainActivity : ComponentActivity() {
                 NavHost(navController = navController, startDestination = Screen.OnBoarding.route) {
                     composable(route = Screen.OnBoarding.route) {
                         val needsNotificationPermission by needsNotificationPermission.collectAsState(
-                            initial = false
+                            initial = false,
                         )
                         OnBoardingScreen(
                             needsPermission = needsNotificationPermission,
                             onSettingBtnClicked = {
                                 showNotificationPreferences()
-                            }
+                            },
                         ) {
                             navController.navigate(Screen.NotificationList.route)
                         }
@@ -58,15 +57,11 @@ class MainActivity : ComponentActivity() {
                     }
                 }
             }
-
         }
     }
 
     private fun showNotificationPreferences() {
         // show notification settings for this app
-        startActivity(Intent(ACTION_NOTIFICATION_LISTENER_SETTINGS));
-
+        startActivity(Intent(ACTION_NOTIFICATION_LISTENER_SETTINGS))
     }
-
-
 }

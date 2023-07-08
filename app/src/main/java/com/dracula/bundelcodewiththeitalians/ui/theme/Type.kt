@@ -17,7 +17,7 @@ private val inter = FontFamily(
         interBold,
         interMedium,
         interRegular,
-    )
+    ),
 )
 
 private val podkovaBold = Font(R.font.podkova_bold, weight = FontWeight.Bold)
@@ -32,74 +32,74 @@ private val podkova = FontFamily(
         podkovaExtraBold,
         podkovaMedium,
         podkovaRegular,
-        podkovaSemiBold
-    )
+        podkovaSemiBold,
+    ),
 )
 
 val BundelTypography = Typography(
     displayLarge = TextStyle(
         fontFamily = podkova,
         fontWeight = FontWeight.Light,
-        fontSize = 96.sp
+        fontSize = 96.sp,
     ),
     displayMedium = TextStyle(
         fontFamily = podkova,
         fontWeight = FontWeight.Normal,
-        fontSize = 60.sp
+        fontSize = 60.sp,
     ),
     displaySmall = TextStyle(
         fontFamily = podkova,
         fontWeight = FontWeight.SemiBold,
-        fontSize = 48.sp
+        fontSize = 48.sp,
     ),
     headlineMedium = TextStyle(
         fontFamily = podkova,
         fontWeight = FontWeight.SemiBold,
-        fontSize = 34.sp
+        fontSize = 34.sp,
     ),
     headlineSmall = TextStyle(
         fontFamily = podkova,
         fontWeight = FontWeight.SemiBold,
-        fontSize = 24.sp
+        fontSize = 24.sp,
     ),
     titleLarge = TextStyle(
         fontFamily = podkova,
         fontWeight = FontWeight.Normal,
-        fontSize = 20.sp
+        fontSize = 20.sp,
     ),
     titleMedium = TextStyle(
         fontFamily = inter,
         fontWeight = FontWeight.Medium,
-        fontSize = 16.sp
+        fontSize = 16.sp,
     ),
     titleSmall = TextStyle(
         fontFamily = inter,
         fontWeight = FontWeight.Medium,
-        fontSize = 14.sp
+        fontSize = 14.sp,
     ),
     bodyLarge = TextStyle(
         fontFamily = inter,
         fontWeight = FontWeight.Normal,
-        fontSize = 16.sp
+        fontSize = 16.sp,
     ),
     bodyMedium = TextStyle(
         fontFamily = inter,
         fontWeight = FontWeight.Normal,
-        fontSize = 14.sp
+        fontSize = 14.sp,
     ),
     labelLarge = TextStyle(
         fontFamily = inter,
         fontWeight = FontWeight.Bold,
-        fontSize = 14.sp
+        fontSize = 14.sp,
     ),
     bodySmall = TextStyle(
         fontFamily = inter,
         fontWeight = FontWeight.Medium,
-        fontSize = 12.sp
+        fontSize = 12.sp,
     ),
     labelSmall = TextStyle(
         fontFamily = inter,
         fontWeight = FontWeight.Normal,
-        fontSize = 12.sp
-    )
+        fontSize = 12.sp,
+    ),
 )

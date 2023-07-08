@@ -10,9 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.hilt.navigation.compose.hiltViewModel
 import com.dracula.bundelcodewiththeitalians.R
-import com.dracula.bundelcodewiththeitalians.utils.RunOnActivityStart
 
 @Composable
 internal fun OnBoardingScreen(
@@ -20,24 +18,26 @@ internal fun OnBoardingScreen(
     onSettingBtnClicked: () -> Unit,
     onDismissClicked: () -> Unit,
 ) {
-
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        if (needsPermission)
+        if (needsPermission) {
             RequestNotificationAccess(onSettingBtnClicked)
-        else Column(
-            modifier = Modifier, horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
-        ) {
-            Text(
-                text = stringResource(id = R.string.bundle_code_with_the_italians),
-                style = MaterialTheme.typography.headlineMedium,
-            )
-            Button(onClick = onDismissClicked) {
-                Text(text = stringResource(R.string.you_are_all_set))
+        } else {
+            Column(
+                modifier = Modifier,
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center,
+            ) {
+                Text(
+                    text = stringResource(id = R.string.bundle_code_with_the_italians),
+                    style = MaterialTheme.typography.headlineMedium,
+                )
+                Button(onClick = onDismissClicked) {
+                    Text(text = stringResource(R.string.you_are_all_set))
+                }
             }
         }
     }

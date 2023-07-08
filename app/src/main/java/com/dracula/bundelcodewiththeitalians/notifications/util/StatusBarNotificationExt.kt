@@ -38,6 +38,6 @@ fun StatusBarNotification.toNotification(): Notification {
             iconLarge = largeIcon,
             iconSmall = smallIcon,
             extraLarge = extraLarge,
-        )
+        ),
     )
 }

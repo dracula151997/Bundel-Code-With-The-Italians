@@ -3,7 +3,6 @@ package com.dracula.bundelcodewiththeitalians.notifications.service
 import android.service.notification.NotificationListenerService
 import android.service.notification.StatusBarNotification
 import com.dracula.bundelcodewiththeitalians.notifications.Notification
-import com.dracula.bundelcodewiththeitalians.notifications.util.text
 import com.dracula.bundelcodewiththeitalians.notifications.util.toNotification
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -17,7 +16,6 @@ class BundelNotificationListenerService : NotificationListenerService() {
         Timber.d("getActiveNotifications")
         return super.getActiveNotifications()
     }
-
 
     override fun onListenerConnected() {
         super.onListenerConnected()

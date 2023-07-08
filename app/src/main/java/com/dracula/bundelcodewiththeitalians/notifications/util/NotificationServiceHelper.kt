@@ -1,10 +1,8 @@
 package com.dracula.bundelcodewiththeitalians.notifications.util
 
-import android.app.Notification
 import android.content.ComponentName
 import android.content.Context
 import android.provider.Settings
-import android.service.notification.StatusBarNotification
 
 internal fun needsNotificationsPermission(context: Context): Boolean {
     val pkgName = context.packageName

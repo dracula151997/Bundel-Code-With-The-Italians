@@ -17,7 +17,7 @@ fun RunOnActivityStart(onStart: () -> Unit) {
             }
         }
     }
-    DisposableEffect(lifecycleObserver, lifecycle){
+    DisposableEffect(lifecycleObserver, lifecycle) {
         lifecycle.addObserver(lifecycleObserver)
         onDispose {
             lifecycle.removeObserver(lifecycleObserver)

@@ -48,7 +48,7 @@ import com.dracula.bundelcodewiththeitalians.notifications.service.BundelNotific
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
 internal fun NotificationsListScreen(
-    lifecycle: Lifecycle
+    lifecycle: Lifecycle,
 ) {
     val notifications by remember(lifecycle) {
         BundelNotificationListenerService.notificationFlow.flowWithLifecycle(lifecycle = lifecycle)
@@ -58,34 +58,30 @@ internal fun NotificationsListScreen(
         modifier = Modifier.fillMaxSize(),
         topBar = {
             NotificationsListTopAppBar()
-        }
+        },
     ) { contentPadding ->
         if (notifications.isNotEmpty()) {
             LazyColumn(
                 modifier = Modifier.fillMaxSize(),
-                contentPadding = contentPadding
+                contentPadding = contentPadding,
             ) {
                 item {
                     Text(
                         text = stringResource(R.string.notifications_screen_title),
                         style = MaterialTheme.typography.headlineMedium,
-                        modifier = Modifier.padding(8.dp)
+                        modifier = Modifier.padding(8.dp),
                     )
                 }
                 stickyHeader {
-
                 }
                 items(notifications) { notification ->
                     NotificationItem(notification)
                 }
             }
-
         } else {
             Text(text = "No notifications", Modifier.padding(8.dp))
         }
     }
-
-
 }
 
 @Composable
@@ -102,7 +98,7 @@ private fun NotificationItem(notification: Notification) {
         Column {
             Row(
                 modifier = Modifier.fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically
+                verticalAlignment = Alignment.CenterVertically,
             ) {
                 Spacer(modifier = Modifier.width(8.dp))
                 NotificationIcon(notification)
@@ -112,7 +108,7 @@ private fun NotificationItem(notification: Notification) {
         }
         Row(
             modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.End
+            horizontalArrangement = Arrangement.End,
         ) {
             Text(
                 DateUtils.getRelativeTimeSpanString(
@@ -132,25 +128,25 @@ private fun NotificationItem(notification: Notification) {
 @Composable
 private fun NotificationIcon(notification: Notification) {
     val icon = notification.icons.iconSmall ?: notification.icons.iconLarge
-    ?: notification.icons.extraLarge
+        ?: notification.icons.extraLarge
     if (icon != null) {
         val iconImageBitmap = icon.asImageBitmap(LocalContext.current)
         iconImageBitmap?.let { bitmap ->
             Image(
                 bitmap = bitmap,
                 contentDescription = null,
-                modifier = Modifier.size(24.dp)
+                modifier = Modifier.size(24.dp),
             )
         } ?: Icon(
             imageVector = Icons.Outlined.BrokenImage,
             contentDescription = null,
-            modifier = Modifier.size(24.dp)
+            modifier = Modifier.size(24.dp),
         )
     } else {
         Icon(
             imageVector = Icons.Outlined.BrokenImage,
             contentDescription = null,
-            modifier = Modifier.size(24.dp)
+            modifier = Modifier.size(24.dp),
         )
     }
 }
@@ -166,11 +162,11 @@ private fun NotificationsListTopAppBar() {
         title = {
             Text(
                 stringResource(id = R.string.app_name),
-                style = MaterialTheme.typography.headlineMedium
+                style = MaterialTheme.typography.headlineMedium,
             )
         },
         colors = TopAppBarDefaults.smallTopAppBarColors(
             containerColor = MaterialTheme.colorScheme.primary,
-        )
+        ),
     )
 }

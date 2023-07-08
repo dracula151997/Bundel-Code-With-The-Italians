@@ -29,8 +29,8 @@ internal class NotificationsListViewModel @Inject constructor() : ViewModel() {
 
     data class State(
         val notifications: List<Notification>,
-        val isConnected: Boolean
-    ){
+        val isConnected: Boolean,
+    ) {
         val hasNotifications: Boolean
             get() = notifications.isNotEmpty()
     }

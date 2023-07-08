@@ -3,6 +3,8 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'com.google.dagger.hilt.android'
     id 'kotlin-kapt'
+    id 'io.gitlab.arturbosch.detekt'
+    id 'org.jmailen.kotlinter'
 
 }
 
@@ -56,6 +58,16 @@ android {
     }
 }
 
+detekt {
+    input = files("src/main/java", "src/main/kotlin")
+    config = rootProject.files("build-config/detekt.yml")
+    reports {
+        sarif {
+            enabled = true
+        }
+    }
+}
+
 dependencies {
     def nav_version = "2.6.0"
     implementation "androidx.navigation:navigation-compose:$nav_version"
@@ -74,6 +86,8 @@ dependencies {
     implementation platform('org.jetbrains.kotlin:kotlin-bom:1.8.0')
     implementation 'androidx.compose.material:material-icons-extended:1.4.3'
     kapt "com.google.dagger:hilt-compiler:2.44"
+    detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.23.0")
+
 }
 kapt {
     correctErrorTypes true

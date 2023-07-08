@@ -6,12 +6,9 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
-
-
 
 internal val bundelLightColors = lightColorScheme(
     primary = bundel_green,
@@ -23,7 +20,7 @@ internal val bundelLightColors = lightColorScheme(
 @Composable
 fun BundelCodeWithTheItaliansTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    content: @Composable () -> Unit
+    content: @Composable () -> Unit,
 ) {
     val colorScheme = bundelLightColors
     val view = LocalView.current
@@ -38,6 +35,6 @@ fun BundelCodeWithTheItaliansTheme(
     MaterialTheme(
         colorScheme = colorScheme,
         typography = BundelTypography,
-        content = content
+        content = content,
     )
 }
