@@ -93,7 +93,7 @@ tasks{
 
     register("staticAnalysis") {
         val detektRelease by getting(Detekt::class)
-        val androidLintRelease = named<com.android.build.gradle.internal.lint.AndroidLintTask>("lintRelease")
+        val androidLintRelease = named<AndroidLintTask>("lintRelease")
 
         dependsOn(detekt, detektRelease, androidLintRelease, lintKotlin)
         finalizedBy(collectSarifReports)
