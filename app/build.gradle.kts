@@ -75,6 +75,7 @@ tasks{
         val detektRelease by getting(Detekt::class)
         val androidLintRelease = named<com.android.build.gradle.internal.lint.AndroidLintTask>("lintRelease")
 
+
         dependsOn(detekt, detektRelease, androidLintRelease)
         from(detektRelease.sarifReportFile) {
             rename { "detekt-release.sarif" }
