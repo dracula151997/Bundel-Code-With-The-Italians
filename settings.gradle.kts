@@ -13,4 +13,4 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "Bundel-Code-With-The-Italians"
-include ':app'
+include(":app")
