@@ -38,8 +38,13 @@ android {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "17"
 
     }
     buildFeatures {
@@ -47,7 +52,7 @@ android {
         aidl =  true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.3.2"
+        kotlinCompilerExtensionVersion = "1.4.8"
     }
     packaging {
         resources {
@@ -55,7 +60,7 @@ android {
         }
     }
     lint{
-        lintConfig = file("build-config/lint.xml")
+        lintConfig = rootProject.file("build-config/lint.xml")
         sarifReport = true
     }
 }
@@ -68,7 +73,7 @@ detekt {
 
 tasks{
     withType<Detekt>{
-        this.jvmTarget = "1.8"
+        jvmTarget = "17"
     }
 
     val collectSarifReports by registering(Sync::class) {
