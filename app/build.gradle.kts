@@ -1,5 +1,5 @@
-import com.android.build.gradle.internal.lint.AndroidLintTask
 import io.gitlab.arturbosch.detekt.Detekt
+import com.android.build.gradle.internal.lint.AndroidLintTask
 
 plugins {
     id("com.android.application")
@@ -71,7 +71,6 @@ tasks{
         this.jvmTarget = "1.8"
     }
 
-    @Suppress("UNUSED_VARIABLE")
     val collectSarifReports by registering(Sync::class) {
         val detektRelease by getting(Detekt::class)
         val androidLintRelease = named<AndroidLintTask>("lintRelease")
