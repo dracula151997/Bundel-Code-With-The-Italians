@@ -1,3 +1,4 @@
+import com.android.build.gradle.internal.lint.AndroidLintTask
 import io.gitlab.arturbosch.detekt.Detekt
 
 plugins {
@@ -73,7 +74,7 @@ tasks{
     @Suppress("UNUSED_VARIABLE")
     val collectSarifReports by registering(Sync::class) {
         val detektRelease by getting(Detekt::class)
-        val androidLintRelease = named<com.android.build.gradle.internal.lint.AndroidLintTask>("lintRelease")
+        val androidLintRelease = named<AndroidLintTask>("lintRelease")
 
 
         dependsOn(detekt, detektRelease, androidLintRelease)
