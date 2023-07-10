@@ -78,7 +78,7 @@ tasks{
 
     val collectSarifReports by registering(Sync::class) {
         val detektRelease by getting(Detekt::class)
-        val androidLintRelease = named<AndroidLintTask>("lintRelease")
+        val androidLintRelease = named<com.android.build.gradle.internal.lint.AndroidLintTask>("lintRelease")
 
 
         dependsOn(detekt, detektRelease, androidLintRelease)
